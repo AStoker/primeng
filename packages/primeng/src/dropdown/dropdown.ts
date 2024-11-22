@@ -98,7 +98,9 @@ export const DROPDOWN_VALUE_ACCESSOR: any = {
             <span *ngIf="!template">{{ label ?? 'empty' }}</span>
             <ng-container *ngTemplateOutlet="template; context: { $implicit: option }"></ng-container>
         </li>
-    `
+    `,
+    imports: [CommonModule],
+    standalone: true
 })
 export class DropdownItem extends BaseComponent {
     @Input() id: string | undefined;
@@ -368,6 +370,8 @@ export class DropdownItem extends BaseComponent {
         '(click)': 'onContainerClick($event)'
     },
     providers: [DROPDOWN_VALUE_ACCESSOR, DropdownStyle],
+    standalone: true,
+    imports: [Overlay],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
@@ -1961,8 +1965,7 @@ export class Dropdown extends BaseComponent implements OnInit, AfterViewInit, Af
 }
 
 @NgModule({
-    imports: [CommonModule, OverlayModule, SharedModule, TooltipModule, Ripple, Scroller, AutoFocusModule, TimesIcon, ChevronDownIcon, SearchIcon, BlankIcon, CheckIcon, InputTextModule, IconField, InputIcon],
-    exports: [Dropdown, OverlayModule, SharedModule, Scroller],
-    declarations: [Dropdown, DropdownItem]
+    imports: [Dropdown, DropdownItem, CommonModule, OverlayModule, SharedModule, TooltipModule, Ripple, Scroller, AutoFocusModule, TimesIcon, ChevronDownIcon, SearchIcon, BlankIcon, CheckIcon, InputTextModule, IconField, InputIcon],
+    exports: [Dropdown, OverlayModule, SharedModule, Scroller]
 })
 export class DropdownModule {}

@@ -18,7 +18,8 @@ import { Component, ElementRef, Input, numberAttribute } from '@angular/core';
         <div class="doc-section-description">
             <ng-content></ng-content>
         </div>
-    `
+    `,
+    standalone: true
 })
 export class AppDocSectionTextComponent {
     @Input() title!: string;

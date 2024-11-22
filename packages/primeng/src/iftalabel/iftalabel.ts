@@ -17,15 +17,15 @@ import { IftaLabelStyle } from './style/iftalabelstyle';
     providers: [IftaLabelStyle],
     host: {
         class: 'p-iftalabel'
-    }
+    },
+    standalone: true
 })
 export class IftaLabel extends BaseComponent {
     _componentStyle = inject(IftaLabelStyle);
 }
 
 @NgModule({
-    imports: [CommonModule, SharedModule, RouterModule],
-    exports: [IftaLabel, SharedModule],
-    declarations: [IftaLabel]
+    imports: [IftaLabel, CommonModule, SharedModule, RouterModule],
+    exports: [IftaLabel, SharedModule]
 })
 export class IftaLabelModule {}

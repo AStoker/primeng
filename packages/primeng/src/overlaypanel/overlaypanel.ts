@@ -89,7 +89,8 @@ import { PopoverStyle } from './style/popoverstyle';
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [PopoverStyle]
+    providers: [PopoverStyle],
+    standalone: true
 })
 export class OverlayPanel extends BaseComponent implements AfterContentInit, OnDestroy {
     /**
@@ -516,8 +517,7 @@ export class OverlayPanel extends BaseComponent implements AfterContentInit, OnD
 }
 
 @NgModule({
-    imports: [CommonModule, Ripple, SharedModule, TimesIcon],
-    exports: [OverlayPanel, SharedModule],
-    declarations: [OverlayPanel]
+    imports: [OverlayPanel, CommonModule, Ripple, SharedModule, TimesIcon],
+    exports: [OverlayPanel, SharedModule]
 })
 export class OverlayPanelModule {}

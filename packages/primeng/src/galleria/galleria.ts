@@ -80,7 +80,8 @@ import { GalleriaStyle } from './style/galleriastyle';
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [GalleriaStyle]
+    providers: [GalleriaStyle],
+    standalone: true
 })
 export class Galleria extends BaseComponent implements OnChanges, OnDestroy {
     /**
@@ -468,7 +469,8 @@ export class Galleria extends BaseComponent implements OnChanges, OnDestroy {
             </div>
         </div>
     `,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class GalleriaContent extends BaseComponent implements DoCheck {
     @Input() get activeIndex(): number {
@@ -597,7 +599,8 @@ export class GalleriaContent extends BaseComponent implements DoCheck {
             <ng-container *ngTemplateOutlet="contentTemplate; context: context"></ng-container>
         </ng-container>
     `,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class GalleriaItemSlot {
     @Input() templates: QueryList<PrimeTemplate> | undefined;
@@ -717,7 +720,9 @@ export class GalleriaItemSlot {
     host: {
         class: 'p-galleria-items-container'
     },
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [GalleriaItemSlot],
+    standalone: true
 })
 export class GalleriaItem implements OnChanges {
     @Input() id: string | undefined;
@@ -957,7 +962,9 @@ export class GalleriaItem implements OnChanges {
             </div>
         </div>
     `,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [CommonModule],
+    standalone: true
 })
 export class GalleriaThumbnails implements OnInit, AfterContentChecked, AfterViewInit, OnDestroy {
     @Input() containerId: string | undefined;
@@ -1449,8 +1456,7 @@ export class GalleriaThumbnails implements OnInit, AfterContentChecked, AfterVie
 }
 
 @NgModule({
-    imports: [CommonModule, SharedModule, Ripple, TimesIcon, ChevronRightIcon, ChevronLeftIcon, WindowMaximizeIcon, WindowMinimizeIcon, FocusTrap],
-    exports: [CommonModule, Galleria, GalleriaContent, GalleriaItemSlot, GalleriaItem, GalleriaThumbnails, SharedModule],
-    declarations: [Galleria, GalleriaContent, GalleriaItemSlot, GalleriaItem, GalleriaThumbnails]
+    imports: [Galleria, GalleriaContent, GalleriaItemSlot, GalleriaItem, GalleriaThumbnails, CommonModule, SharedModule, Ripple, TimesIcon, ChevronRightIcon, ChevronLeftIcon, WindowMaximizeIcon, WindowMinimizeIcon, FocusTrap],
+    exports: [CommonModule, Galleria, GalleriaContent, GalleriaItemSlot, GalleriaItem, GalleriaThumbnails, SharedModule]
 })
 export class GalleriaModule {}

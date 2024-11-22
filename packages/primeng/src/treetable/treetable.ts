@@ -268,7 +268,9 @@ export class TreeTableService {
         </div>
     `,
     providers: [TreeTableService, TreeTableStyle],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    imports: [CommonModule],
+    standalone: true
 })
 export class TreeTable extends BaseComponent implements AfterContentInit, OnInit, OnDestroy, BlockableUI, OnChanges {
     _componentStyle = inject(TreeTableStyle);
@@ -2312,7 +2314,8 @@ export class TreeTable extends BaseComponent implements AfterContentInit, OnInit
             <ng-container *ngTemplateOutlet="tt.emptyMessageTemplate; context: { $implicit: columns, frozen: frozen }"></ng-container>
         </ng-container>
     `,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true
 })
 export class TTBody {
     @Input('pTreeTableBody') columns: any[] | undefined;
@@ -2427,7 +2430,9 @@ export class TTBody {
             </div>
         </div>
     `,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    imports: [CommonModule],
+    standalone: true
 })
 export class TTScrollableView implements AfterViewInit, OnDestroy {
     @Input('ttScrollableView') columns: any[] | undefined;
@@ -2643,7 +2648,8 @@ export class TTScrollableView implements AfterViewInit, OnDestroy {
         '[attr.tabindex]': 'isEnabled() ? "0" : null',
         '[attr.role]': '"columnheader"',
         '[attr.aria-sort]': 'ariaSorted'
-    }
+    },
+    standalone: true
 })
 export class TTSortableColumn implements OnInit, OnDestroy {
     @Input('ttSortableColumn') field: string | undefined;
@@ -2718,7 +2724,8 @@ export class TTSortableColumn implements OnInit, OnDestroy {
             <ng-template *ngTemplateOutlet="tt.sortIconTemplate; context: { $implicit: sortOrder }"></ng-template>
         </span>`,
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class TTSortIcon implements OnInit, OnDestroy {
     @Input() field: string | undefined;
@@ -2766,7 +2773,8 @@ export class TTSortIcon implements OnInit, OnDestroy {
 }
 
 @Directive({
-    selector: '[ttResizableColumn]'
+    selector: '[ttResizableColumn]',
+    standalone: true
 })
 export class TTResizableColumn implements AfterViewInit, OnDestroy {
     @Input({ transform: booleanAttribute }) ttResizableColumnDisabled: boolean | undefined;
@@ -2851,7 +2859,8 @@ export class TTResizableColumn implements AfterViewInit, OnDestroy {
 }
 
 @Directive({
-    selector: '[ttReorderableColumn]'
+    selector: '[ttReorderableColumn]',
+    standalone: true
 })
 export class TTReorderableColumn implements AfterViewInit, OnDestroy {
     @Input({ transform: booleanAttribute }) ttReorderableColumnDisabled: boolean | undefined;
@@ -2959,7 +2968,8 @@ export class TTReorderableColumn implements AfterViewInit, OnDestroy {
     host: {
         '[class.p-treetable-row-selected]': 'selected',
         '[attr.aria-checked]': 'selected'
-    }
+    },
+    standalone: true
 })
 export class TTSelectableRow implements OnInit, OnDestroy {
     @Input('ttSelectableRow') rowNode: any;
@@ -3044,7 +3054,8 @@ export class TTSelectableRow implements OnInit, OnDestroy {
     selector: '[ttSelectableRowDblClick]',
     host: {
         '[class.p-treetable-row-selected]': 'selected'
-    }
+    },
+    standalone: true
 })
 export class TTSelectableRowDblClick implements OnInit, OnDestroy {
     @Input('ttSelectableRowDblClick') rowNode: any;
@@ -3098,7 +3109,8 @@ export class TTSelectableRowDblClick implements OnInit, OnDestroy {
     host: {
         '[class.p-treetable-contextmenu-row-selected]': 'selected',
         '[attr.tabindex]': 'isEnabled() ? 0 : undefined'
-    }
+    },
+    standalone: true
 })
 export class TTContextMenuRow {
     @Input('ttContextMenuRow') rowNode: any | undefined;
@@ -3158,7 +3170,9 @@ export class TTContextMenuRow {
         </p-checkbox>
     `,
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [Checkbox, FormsModule],
+    standalone: true
 })
 export class TTCheckbox {
     @Input({ transform: booleanAttribute }) disabled: boolean | undefined;
@@ -3247,7 +3261,9 @@ export class TTCheckbox {
         </p-checkbox>
     `,
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [Checkbox, FormsModule],
+    standalone: true
 })
 export class TTHeaderCheckbox {
     checked: boolean | undefined;
@@ -3330,7 +3346,8 @@ export class TTHeaderCheckbox {
 }
 
 @Directive({
-    selector: '[ttEditableColumn]'
+    selector: '[ttEditableColumn]',
+    standalone: true
 })
 export class TTEditableColumn implements AfterViewInit {
     @Input('ttEditableColumn') data: any;
@@ -3513,7 +3530,8 @@ export class TTEditableColumn implements AfterViewInit {
             <ng-container *ngTemplateOutlet="outputTemplate"></ng-container>
         </ng-container>
     `,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true
 })
 export class TreeTableCellEditor extends BaseComponent implements AfterContentInit {
     inputTemplate: Nullable<TemplateRef<any>>;
@@ -3552,7 +3570,8 @@ export class TreeTableCellEditor extends BaseComponent implements AfterContentIn
         '[attr.aria-level]': 'level',
         '[attr.data-pc-section]': 'row',
         '[attr.role]': 'row'
-    }
+    },
+    standalone: true
 })
 export class TTRow {
     get level() {
@@ -3764,7 +3783,8 @@ export class TTRow {
             <ng-template *ngTemplateOutlet="tt.togglerIconTemplate; context: { $implicit: rowNode.node.expanded }"></ng-template>
         </button>
     `,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true
 })
 export class TreeTableToggler extends BaseComponent {
     @Input() rowNode: any;
@@ -3817,7 +3837,23 @@ export class TreeTableToggler extends BaseComponent {
         ChevronRightIcon,
         Checkbox,
         SharedModule,
-        FormsModule
+        FormsModule,
+        TreeTable,
+        TreeTableToggler,
+        TTScrollableView,
+        TTBody,
+        TTSortableColumn,
+        TTSortIcon,
+        TTResizableColumn,
+        TTRow,
+        TTReorderableColumn,
+        TTSelectableRow,
+        TTSelectableRowDblClick,
+        TTContextMenuRow,
+        TTCheckbox,
+        TTHeaderCheckbox,
+        TTEditableColumn,
+        TreeTableCellEditor
     ],
     exports: [
         TreeTable,
@@ -3836,24 +3872,6 @@ export class TreeTableToggler extends BaseComponent {
         TTEditableColumn,
         TreeTableCellEditor,
         Scroller
-    ],
-    declarations: [
-        TreeTable,
-        TreeTableToggler,
-        TTScrollableView,
-        TTBody,
-        TTSortableColumn,
-        TTSortIcon,
-        TTResizableColumn,
-        TTRow,
-        TTReorderableColumn,
-        TTSelectableRow,
-        TTSelectableRowDblClick,
-        TTContextMenuRow,
-        TTCheckbox,
-        TTHeaderCheckbox,
-        TTEditableColumn,
-        TreeTableCellEditor
     ]
 })
 export class TreeTableModule {}

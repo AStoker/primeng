@@ -1,3 +1,4 @@
+import { AppDocSectionTextComponent } from '@/components/doc/app.docsectiontext.component';
 import { Code } from '@/domain/code';
 import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
@@ -16,7 +17,9 @@ import { MessageService } from 'primeng/api';
         </div>
         <app-code [code]="code" selector="toast-clear-demo"></app-code>
     `,
-    providers: [MessageService]
+    providers: [MessageService],
+    standalone: true,
+    imports: [AppDocSectionTextComponent]
 })
 export class ClearDoc {
     constructor(private messageService: MessageService) {}

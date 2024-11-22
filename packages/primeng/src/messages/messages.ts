@@ -106,7 +106,9 @@ import { MessagesStyle } from './style/messagesstyle';
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [MessagesStyle]
+    providers: [MessagesStyle],
+    imports: [CommonModule],
+    standalone: true
 })
 export class Messages extends BaseComponent implements AfterContentInit, OnDestroy {
     /**
@@ -312,8 +314,7 @@ export class Messages extends BaseComponent implements AfterContentInit, OnDestr
 }
 
 @NgModule({
-    imports: [CommonModule, Ripple, CheckIcon, InfoCircleIcon, TimesCircleIcon, ExclamationTriangleIcon, TimesIcon, ButtonModule, SharedModule],
-    exports: [Messages, SharedModule],
-    declarations: [Messages]
+    imports: [Messages, CommonModule, Ripple, CheckIcon, InfoCircleIcon, TimesCircleIcon, ExclamationTriangleIcon, TimesIcon, ButtonModule, SharedModule],
+    exports: [Messages, SharedModule]
 })
 export class MessagesModule {}
